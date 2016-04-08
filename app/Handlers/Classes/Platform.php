@@ -30,4 +30,12 @@ class Platform {
 	public function getType() {
 		return $this->type;
 	}
+
+	public function getQuery() {
+		if ($this->type === 'csv') {
+			return $this->storage->getQuery();
+		}
+
+		return null;
+	}
 }

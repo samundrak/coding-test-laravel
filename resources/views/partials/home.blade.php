@@ -26,7 +26,7 @@ Natinality
 </li>
 <li class="list-group-item">
 Date Of Birth
-	<input type="text" ng-model="details.dob" class="form-control"  />
+	<input type="date" ng-model="details.dob" class="form-control"  />
 </li>
 <li class="list-group-item">
 Education Background

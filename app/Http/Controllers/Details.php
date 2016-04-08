@@ -8,13 +8,35 @@ use Illuminate\Http\Request;
 use Validator;
 
 class Details extends Controller {
+	private $platform;
+	private $storage;
+	public function __construct() {
+		$this->platform = new Platform();
+		$this->storage = $this->platform
+			->setStorageType('csv')
+			->init()
+			->getStorageInstance()
+			->write();
+
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() {
-		//
+	public function index(Request $request) {
+		$query = $this->storage->getQuery()->fetch();
+		$select = $query
+			->select();
+		$result = $select
+			->range($request->get('from'), $request->get('to'))
+			->limit($request->get('limit'))
+			->reverse($request->get('reverse'))
+			->get();
+		if ($result != null) {
+			return Utils::getInstance()->response(1, json_encode(['lists' => $result, 'last' => $select->getRowCount() + 1]));
+		}
+		return Utils::getInstance()->response(0, "No Details List found");
 	}
 
 	/**
@@ -37,20 +59,14 @@ class Details extends Controller {
 
 		$validator = Validator::make($request->all(), $rules);
 		if (!$validator->passes()) {
-			return Utils::response(0, Utils::getFormatedErrorMessages($validator->messages()));
-		}
-		$platform = new Platform();
-		$storage = $platform
-			->setStorageType('csv')
-			->init()
-			->getStorageInstance()
-			->write();
-
-		if ($storage->insert($request->all())) {
-			return Utils::response(1, "Details has been inserted");
+			return Utils::getInstance()->response(0, Utils::getFormatedErrorMessages($validator->messages()));
 		}
 
-		return Utils::response(0, 'Unable to insert the details');
+		if ($this->storage->insert($request->all())) {
+			return Utils::getInstance()->response(1, "Details has been inserted");
+		}
+
+		return Utils::getInstance()->response(0, 'Unable to insert the details');
 	}
 
 	/**
@@ -71,6 +87,15 @@ class Details extends Controller {
 	 */
 	public function show($id) {
 		//
+		$query = $this->storage->getQuery()->fetch();
+		// error_log($id . '');
+		$result = $query->select(['id' => $id . ''])->getFirst();
+		if ($result != null) {
+			return Utils::getInstance()->response(1, json_encode($result));
+		} else {
+			return Utils::getInstance()->response(1, "No result found");
+		}
+
 	}
 
 	/**

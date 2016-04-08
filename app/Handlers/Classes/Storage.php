@@ -7,5 +7,5 @@ interface Storage {
 	public function delete();
 	public function update();
 	public function close();
-	public function select($filter);
+	public function getQuery();
 }

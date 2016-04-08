@@ -17,8 +17,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 alert alert-warning">
-                                <button class="btn btn-default"> See Lists</button>
-                                <button class="btn btn-default"> Add Data</button>
+                                <button ui-sref="list" class="btn btn-default"> See Lists</button>
+                                <button ui-sref="home" class="btn btn-default"> Add Data</button>
                         </div>
                     </div>
                     <div class="row">

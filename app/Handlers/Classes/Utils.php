@@ -2,8 +2,16 @@
 namespace App\Handlers\Classes;
 
 class Utils {
+	private static $INSTANCE;
 
-	public static function response($type, $message = null, $data = null) {
+	private function __construct() {}
+	public static function getInstance() {
+		if (self::$INSTANCE == null) {
+			self::$INSTANCE = new Utils();
+		}
+		return self::$INSTANCE;
+	}
+	public function response($type, $message = null, $data = null) {
 		$arr = ["success" => $type];
 		if ($data != null) {
 			$arr['data'] = $data;
@@ -14,7 +22,7 @@ class Utils {
 		return $arr;
 	}
 
-	public static function getFormatedErrorMessages($data) {
+	public function getFormatedErrorMessages($data) {
 		try {
 			$data = json_decode($data, true);
 			$messages = [];
@@ -27,5 +35,9 @@ class Utils {
 		} catch (Exception $e) {
 			return ["Server Error please try later"];
 		}
+	}
+
+	public function getFields() {
+		return "name,gender,phone,email,address,country,dob,education,contact";
 	}
 }

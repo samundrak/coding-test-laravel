@@ -1,7 +1,9 @@
 <?php
 namespace App\Handlers\Classes\Storage;
 
+use App\Handlers\Classes\Query;
 use App\Handlers\Classes\Storage;
+use App\Handlers\Classes\Utils;
 
 class CSV implements Storage {
 	private $fileName;
@@ -9,7 +11,7 @@ class CSV implements Storage {
 
 	public function __construct() {
 		$this->fileName = 'storage/storage.csv';
-		$this->fields = "id,name,gender,phone,email,address,country,dob,education,contact";
+		$this->fields = Utils::getInstance()->getFields();
 	}
 
 	public function init() {
@@ -59,17 +61,12 @@ class CSV implements Storage {
 
 	}
 
-	public function select($clause = null) {
-		$rows = [];
-		while (!feof($this->file)) {
-			$rows = fgetcsv($this->fileName);
+	public function getQuery() {
+		$query = new Query($this->fileName);
+		if ($query->connect()) {
+			$query->setFields(Utils::getInstance()->getFields());
+			return $query;
 		}
-		if ($clause === null) {
-			return $rows;
-		} else if ($clause != null) {
-
-		} else {
-			return null;
-		}
+		return null;
 	}
 }
