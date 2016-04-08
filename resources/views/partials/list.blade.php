@@ -3,6 +3,7 @@
 <div class="alert alert alert-warning" ng-if="!details.lists.length"> No Details found</div>
 <table class="table table-stripped" ng-if="details.lists.length">
 <tr>
+	<th>SN</th>
 	<th>Name</th>
 	<th>Gender</th>
 	<th>Phone</th>
@@ -14,6 +15,7 @@
 	<th>Contact</th>
 </tr>
 <tr ng-repeat="detail in details.lists">
+	<td> @{{ detail.id - 1   }}</td>
 	<td> @{{ detail.name  }}</td>
 	<td> @{{ detail.gender }}</td>
 	<td> @{{ detail.phone }}</td>
@@ -25,5 +27,4 @@
 	<td>@{{ detail.contact === 'null' ? ' Not Available' :  detail.contact }}</td>
 </tr>
 </table>
-@{{details.last}}
-<pagination total="details.last" span="3" last="3"></pagination>
+<pagination ng-if="details.lists.length" total="details.last" span="3" last="details.lists[details.lists.length -1].id"></pagination>

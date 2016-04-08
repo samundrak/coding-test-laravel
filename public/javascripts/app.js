@@ -41,7 +41,7 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
             }
         });
     }])
-    .controller('listCtrl', ['$scope', '$http', function($scope, $http) {
+    .controller('listCtrl', ['$scope', '$http', '$rootScope',function($scope, $http,$rootScope) {
         angular.extend($scope, {
             details: {
                 lists  : []
@@ -49,13 +49,20 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
         });
 
         angular.extend($scope, {
-            getDetails: function() {
-                $http.get('/api/details')
+            getDetails: function(data) {
+                var url = '/api/details';
+                    url += "?";
+                if(data){
+                    url += 'limit='+data.limit+'&'+'from='+data.from;
+                }else{
+                    url += "limit=3";
+                }
+                $http.get(url)
                     .success(function(response) {
                         if (!response.success) return toast('No data found');
 
                         response.message = JSON.parse(response.message);
-                        console.log($scope.detials);
+                        console.log($scope.details);
                         $scope.details.lists = response.message.lists;
                         $scope.details.last =  response.message.last;
                     })
@@ -63,6 +70,11 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
                         toast('Unable to connect');
                     })
             }
+        });
+
+        $rootScope.$on('paginationClicked',function(type,data){
+            console.log(data)
+            $scope.getDetails({limit : 3, from  : data.clicked  });
         });
         $scope.getDetails();
     }])

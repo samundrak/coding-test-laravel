@@ -28,13 +28,15 @@ class Details extends Controller {
 		$query = $this->storage->getQuery()->fetch();
 		$select = $query
 			->select();
+		$rowCount = $select->getRowCount();
 		$result = $select
+			->from($request->get('from'), $request->get('to'))
 			->range($request->get('from'), $request->get('to'))
-			->limit($request->get('limit'))
 			->reverse($request->get('reverse'))
+			->limit($request->get('limit'))
 			->get();
 		if ($result != null) {
-			return Utils::getInstance()->response(1, json_encode(['lists' => $result, 'last' => $select->getRowCount() + 1]));
+			return Utils::getInstance()->response(1, json_encode(['lists' => $result, 'last' => $rowCount + 1]));
 		}
 		return Utils::getInstance()->response(0, "No Details List found");
 	}

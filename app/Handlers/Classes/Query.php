@@ -104,8 +104,28 @@ class Query {
 		return $this;
 	}
 
+	public function from($from = '', $to = '') {
+		if (empty($from)) {
+			return $this;
+		}
+
+		if (!empty($to)) {
+			return $this;
+		}
+		$tempArr = [];
+		foreach ($this->data as $data) {
+			if ($data['id'] >= $from) {
+				array_push($tempArr, $data);
+			}
+		}
+		$this->data = $tempArr;
+
+		unset($tempArr);
+		return $this;
+	}
+
 	public function range($from = '', $to = '') {
-		if (empty($from) && empty($to)) {
+		if (empty($from) || empty($to)) {
 			return $this;
 		}
 
