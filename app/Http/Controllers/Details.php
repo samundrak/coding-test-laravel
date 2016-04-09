@@ -34,9 +34,9 @@ class Details extends Controller
             ->select();
         $rowCount = $select->getRowCount();
         $result   = $select
+            // ->reverse($request->get('reverse'))
             ->from($request->get('from'), $request->get('to'))
             ->range($request->get('from'), $request->get('to'))
-            ->reverse($request->get('reverse'))
             ->limit($request->get('limit'))
             ->get();
         if ($result != null) {

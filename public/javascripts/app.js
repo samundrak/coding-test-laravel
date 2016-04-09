@@ -3,13 +3,13 @@ app.config(['$urlRouterProvider', '$stateProvider',
     function($urlRouterProvider, $stateProvider) {
         $urlRouterProvider.otherwise('/');
         $stateProvider.state({
-            url: '/',
+            url: '/add',
             name: 'home',
             templateUrl: '/views/partials/home',
             controller: 'addDetailCtrl'
         }).state({
             name: 'list',
-            url: '/see_lists',
+            url: '/',
             templateUrl: '/views/partials/list',
             controller: 'listCtrl'
         }).state({
@@ -57,6 +57,7 @@ app.config(['$urlRouterProvider', '$stateProvider',
             getDetails: function(data) {
                 var url = '/api/details';
                 url += "?";
+                url += "reverse=true&";
                 if (data) {
                     url += 'limit=' + data.limit + '&' + 'from=' + data.from;
                 } else {
@@ -149,7 +150,7 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     last = item;
                     counter++;
                 };
-                // html += '  <li><a  ng-click="pageClick(' + last + ')" href="javascript:void(0);" aria-label="Next"><span aria-hidden="true">»</span></a></li>';
+                html += '  <li><a  ng-click="pageClick(' +( last + scope.span ) + ')" href="javascript:void(0);" aria-label="Next"><span aria-hidden="true">Last</span></a></li>';
                 html += '</ul></nav>';
                 element.html(html);
                 $compile(element.contents())(scope);

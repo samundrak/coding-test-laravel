@@ -161,7 +161,8 @@ class Query
     public function reverse($reverse = '')
     {
         if (!empty($reverse)) {
-            array_reverse($this->data);
+        error_log($reverse);
+            $this->data = array_reverse($this->data);
         }
 
         return $this;

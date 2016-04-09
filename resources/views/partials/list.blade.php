@@ -1,7 +1,6 @@
 {{-- name,gender,phone,email,address,country,dob,education,contact --}}
-
 <div class="alert alert alert-warning" ng-if="!details.lists.length"> No Details found</div>
-<table class="table table-stripped" ng-if="details.lists.length">
+<table class="table  table-striped" ng-if="details.lists.length">
 <tr>
 	<th>SN</th>
 	<th>Name</th>
@@ -13,6 +12,7 @@
 	<th>Date Of Birth</th>
 	<th>Education</th>
 	<th>Contact</th>
+	<th>Actions	</th>
 </tr>
 <tr ng-repeat="detail in details.lists">
 	<td> @{{ detail.id - 1   }}</td>
