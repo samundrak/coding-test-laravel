@@ -57,7 +57,6 @@ app.config(['$urlRouterProvider', '$stateProvider',
             getDetails: function(data) {
                 var url = '/api/details';
                 url += "?";
-                url += "reverse=true&";
                 if (data) {
                     url += 'limit=' + data.limit + '&' + 'from=' + data.from;
                 } else {
