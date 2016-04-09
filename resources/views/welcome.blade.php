@@ -7,7 +7,6 @@
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="bower_components/vue/dist/vue.min.js"></script>
         <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
         <script type="text/javascript" src="javascripts/pace.min.js"></script>
         <script type="text/javascript" src="javascripts/toast.min.js"></script>

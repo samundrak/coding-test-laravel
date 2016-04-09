@@ -22,7 +22,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
 ]).controller('addDetailCtrl', ['$scope', '$http',
     function($scope, $http) {
         angular.extend($scope, {
-            details: {}
+            details: {},
+            genderList: ['male', 'female']
         });
         angular.extend($scope, {
             submitDetails: function() {
@@ -64,30 +65,24 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 $http.get(url).success(function(response) {
                     if (!response.success) return toast('No data found');
                     response.message = JSON.parse(response.message);
-                    console.log($scope.details);
                     $scope.details.lists = response.message.lists;
                     $scope.details.last = response.message.last;
                 }).error(function(error) {
                     toast('Unable to connect');
                 })
             },
-            deleteItem : function(index,item){
-                if(index === undefined|| !item ) return;
-
-                $http.post('/api/details/remove/'+item.id)
-                .success(function(response){
-                    if(!response.success) return toast(response.message);
-
-                    console.log('must be here')
+            deleteItem: function(index, item) {
+                if (index === undefined || !item) return;
+                $http.post('/api/details/remove/' + item.id).success(function(response) {
+                    if (!response.success) return toast(response.message);
                     $scope.details.lists.splice(index, 1);
                     toast(response.message);
-                    if(!$scope.details.lists.length){
+                    if (!$scope.details.lists.length) {
                         $scope.getDetails();
                     }
-                })  
-                .error(function(error){
+                }).error(function(error) {
                     toast('Some error occured while accessing internet');
-                })  ;            
+                });
             }
         });
         $rootScope.$on('paginationClicked', function(type, data) {
@@ -106,7 +101,15 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 if (!$stateParams.id) return;
                 $http.get('/api/details/' + $stateParams.id).success(function(response) {
                     if (!response.success) return $state.go('list');
-                    $scope.details = JSON.parse(response.message);
+                    try {
+                        $scope.details = JSON.parse(response.message);
+                        $scope.isContact = $scope.details.contact === 'null' ? false : true;
+                        // $scope.details.contact = $scope.details.contact === 'null' ? '' : $scope.details.contact;
+                        $scope.details.phone = parseInt($scope.details.phone);
+                        $scope.details.dob = new Date($scope.details.dob);
+                    } catch (err) {
+                        console.log('érror found')
+                    }
                 }).error(function(error) {
                     $state.go('list');
                     toast('Some problem error');
@@ -115,9 +118,9 @@ app.config(['$urlRouterProvider', '$stateProvider',
             submitDetails: function() {
                 if (!$scope.details) return;
                 $http.post('/api/details/' + $stateParams.id, $scope.details).success(function(response) {
-                    if(!response.success) return false;
+                    if (!response.success) return false;
                     toast(response.message);
-                })  .error(function(error) {
+                }).error(function(error) {
                     toast("Some error occured Please try again!");
                 })
             }

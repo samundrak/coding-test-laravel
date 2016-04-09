@@ -22,7 +22,7 @@
 	<td>@{{ detail.email }}</td>
 	<td>@{{ detail.address }}</td>
 	<td>@{{ detail.country }}</td>
-	<td>@{{ detail.dob }}</td>
+	<td>@{{ detail.dob | date:'mm/dd/yyyy'}}</td>
 	<td>@{{ detail.education }}</td>
 	<td>@{{ detail.contact === 'null' ? ' Not Available' :  detail.contact }}</td>
 	<td> 
