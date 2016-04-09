@@ -2,7 +2,7 @@
 <ul class="list-group">
 <li class="list-group-item">
 Enter Name
-	<input type="text" ng-model="details.name" class="form-control" />
+	<input type="text" ng-model="details.name" class="form-control" required />
 </li>
 <li class="list-group-item">
 Gender
@@ -12,27 +12,27 @@ Gender
 </li>
 <li class="list-group-item">
 Phone
-	<input type="number" ng-model="details.phone" class="form-control" />
+	<input type="number" ng-model="details.phone" class="form-control" required/>
 </li>
 <li class="list-group-item">
 Email
-	<input type="email" ng-model="details.email" class="form-control" />
+	<input type="email" ng-model="details.email" class="form-control" required/>
 </li>
 <li class="list-group-item">
 Address
-	<input type="text" ng-model="details.address" class="form-control"  />
+	<input type="text" ng-model="details.address" class="form-control"  required/>
 </li>
 <li class="list-group-item">
 Natinality
-	<input type="text" ng-model="details.country" class="form-control"  />
+	<input type="text" ng-model="details.country" class="form-control" required/>
 </li>
 <li class="list-group-item">
 Date Of Birth
-	<input type="date" ng-model="details.dob" class="form-control"  />
+	<input type="date" ng-model="details.dob" class="form-control"  required/>
 </li>
 <li class="list-group-item">
 Education Background
-	<input type="text" ng-model="details.education" class="form-control"  />
+	<input type="text" ng-model="details.education" class="form-control"  required/>
 </li>
 <li class="list-group-item">
 Prefered mode of Contact

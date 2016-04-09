@@ -1,18 +1,25 @@
 {
-  "name": "coding-test",
-  "description": "Simple Coding Test",
+  "name": "coding-test-laravel",
+  "description": "Test app",
   "main": "public/index.php",
   "authors": [
     "samundrak <samundrak@yahoo.com>"
   ],
   "license": "MIT",
+  "homepage": "https://github.com/samundrak/coding-test-laravel",
   "moduleType": [],
-  "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "public/bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular-ui-router": "ui-router#^0.2.18",
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "underscore": "^1.8.3"
+  }
 }
