@@ -221,9 +221,45 @@ class Query
                     array_push($tempArr, $child_value);
                 }
             }
-            fputcsv($file,  $tempArr);
+            fputcsv($file, $tempArr);
             unset($tempArr);
         }
         fclose($file);
+    }
+
+    public function delete($filter, $cb = null)
+    {
+        $filter = $filter['where'];
+        $index  = 0;
+        foreach ($this->data as $key => $value) {
+            $matchedValue = 0;
+            foreach ($value as $child_key => $child_value) {
+                foreach ($filter as $filter_key => $filter_value) {
+                    // error_log($child_key . ' - ' . $child_value);
+                    if ($filter_key == $child_key && $filter_value == $value[$child_key]) {
+                        // error_log("key matched " . $filter_key . " and  " . $child_key);
+                        // error_log("value matched " . $value[$child_key] . " and  " . $filter_value);
+                        // error_log("");
+                        $matchedValue++;
+                    }
+                }
+            }
+            // error_log($matchedValue);
+            if ($matchedValue >= sizeof($filter)) {
+	            array_splice($this->data,$index, 1);
+                if ($cb != null) {
+                    $cb->run(false, true);
+                }
+            } else {
+                if ($index === sizeof($this->data)) {
+                    if ($cb != null) {
+                        $cb->run(true, false);
+                    }
+                }
+            }
+
+            $index++;
+        }
+        $this->writeUpdate();
     }
 }

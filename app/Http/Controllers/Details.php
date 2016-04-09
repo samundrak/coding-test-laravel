@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\Classes\Completion;
 use App\Handlers\Classes\Platform;
 use App\Handlers\Classes\Utils;
 use Illuminate\Http\Request;
@@ -112,7 +113,7 @@ class Details extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
         $rules = array(
             'email'     => 'required|email',
@@ -130,14 +131,16 @@ class Details extends Controller
             return Utils::getInstance()->response(0, Utils::getFormatedErrorMessages($validator->messages()));
         }
 
-        $query  = $this->storage->getQuery()->fetch();
-        $select = $query
+        $this
+            ->storage
+            ->getQuery()
+            ->fetch()
             ->select()
             ->update([
-            	'where' => [ 'id' => $id],
-            	'data'  => $request->all()
-            	]);
-            return Utils::getInstance()->response(1, "Your  data has been updated successfully");
+                'where' => ['id' => $id],
+                'data'  => $request->all(),
+            ]);
+        return Utils::getInstance()->response(1, "Your  data has been updated successfully");
     }
 
     /**
@@ -160,6 +163,11 @@ class Details extends Controller
      */
     public function destroy($id)
     {
-        //
+        $response = false;
+        $this->storage->getQuery()->fetch()->select()
+            ->delete([
+                'where' => ['id' => $id],
+            ], new Completion($response));
+            return Utils::getInstance()->response(1, "Your data has been deleted successfully");
     }
 }

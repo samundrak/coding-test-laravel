@@ -70,10 +70,27 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 }).error(function(error) {
                     toast('Unable to connect');
                 })
+            },
+            deleteItem : function(index,item){
+                if(index === undefined|| !item ) return;
+
+                $http.post('/api/details/remove/'+item.id)
+                .success(function(response){
+                    if(!response.success) return toast(response.message);
+
+                    console.log('must be here')
+                    $scope.details.lists.splice(index, 1);
+                    toast(response.message);
+                    if(!$scope.details.lists.length){
+                        $scope.getDetails();
+                    }
+                })  
+                .error(function(error){
+                    toast('Some error occured while accessing internet');
+                })  ;            
             }
         });
         $rootScope.$on('paginationClicked', function(type, data) {
-            console.log(data)
             $scope.getDetails({
                 limit: 3,
                 from: data.clicked

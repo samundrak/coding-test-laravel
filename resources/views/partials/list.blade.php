@@ -27,6 +27,7 @@
 	<td>@{{ detail.contact === 'null' ? ' Not Available' :  detail.contact }}</td>
 	<td> 
 	<a ui-sref="edit({id:detail.id})" >Edit </a>
+	<a ng-click="deleteItem($index,detail)" style="cursor: pointer;" >Delete </a>
 	</td>
 </tr>
 </table>
