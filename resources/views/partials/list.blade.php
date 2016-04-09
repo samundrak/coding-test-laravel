@@ -25,6 +25,9 @@
 	<td>@{{ detail.dob }}</td>
 	<td>@{{ detail.education }}</td>
 	<td>@{{ detail.contact === 'null' ? ' Not Available' :  detail.contact }}</td>
+	<td> 
+	<a ui-sref="edit({id:detail.id})" >Edit </a>
+	</td>
 </tr>
 </table>
 <pagination ng-if="details.lists.length" total="details.last" span="3" last="details.lists[details.lists.length -1].id"></pagination>
