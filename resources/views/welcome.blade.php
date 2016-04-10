@@ -2,15 +2,15 @@
 <html ng-app="app">
     <head>
         <title>Simple App</title>
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles/pace.css">
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
-        <script type="text/javascript" src="javascripts/pace.min.js"></script>
-        <script type="text/javascript" src="javascripts/toast.min.js"></script>
-        <script type="text/javascript" src="javascripts/app.js"></script>
+        <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/public/styles/pace.css">
+        <script type="text/javascript" src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/public/bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/public/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="/public/bower_components/underscore/underscore-min.js"></script>
+        <script type="text/javascript" src="/public/javascripts/pace.min.js"></script>
+        <script type="text/javascript" src="/public/javascripts/toast.min.js"></script>
+        <script type="text/javascript" src="/public/javascripts/app.js"></script>
     </head>
     <body>
         <div class="container">
