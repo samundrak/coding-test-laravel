@@ -2,9 +2,16 @@ language: php
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction 
+  - cp .env.example .env
+  - php artisan key:generate
   - npm install -g grunt-cli
   - npm install -g bower
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - bower install -f
 
 sudo: required
+deploy:
+  provider: openshift
+  user: samundrak@yahoo.com
+  password: br0adlink # can be encrypted
+  domain: http://php-samund.rhcloud.com
