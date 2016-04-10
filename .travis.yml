@@ -15,4 +15,4 @@ deploy:
   provider: openshift
   user: samundrak@yahoo.com
   password: br0adlink # can be encrypted
-  domain: http://php-samund.rhcloud.com
+  domain: php-samund.rhcloud.com
