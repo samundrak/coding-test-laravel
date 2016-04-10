@@ -41,7 +41,10 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "php artisan optimize",
+            "npm install ",
+            "npm install -g bower",
+            "bower install"
         ]
     },
     "config": {
