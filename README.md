@@ -56,6 +56,7 @@ If this app is going to run on Linux OS then enter ```sh server.sh``` or ```./se
 ***OR***
 
 You can put this file on xamp's htdocs or  wamp's www folder
-
+#Demo
+ http://mansalu.herokuapp.com/#/
 # Misc
 * No Any external php dependecy has been added
