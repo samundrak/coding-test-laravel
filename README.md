@@ -28,9 +28,10 @@ Show all clients pulled in from the CSV as another page
 * **Laravel** [ PHP Framework ] for backend stuff 
 * **BootStrap** for simple layouts
 *  **Jquery** as dependency of bootstrap
-*  **AngularJS** for frontend stuff like routing,validation, api call
+*  **AngularJS** for frontend stuff like routing,validation, api calls
 *  **Bower** to install frontend dependecies 
 *  **Gulp** to autmate some build task like for **PHPunit**
+*  **PaceJS** for displaying loading bar on ajax calls
 
 ### Installation 
  First clone this repo and then from root of this app in your command line enter 
@@ -47,7 +48,7 @@ If this app is going to run on Linux OS then enter ```sh server.sh``` or ```./se
 
 ***OR*** 
 
-```php -S localhost:3000 -t ./public/```
+```php -S localhost:3000 -t ./```
 
 ***OR***
 
