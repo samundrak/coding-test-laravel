@@ -12,5 +12,6 @@ sudo: required
 deploy:
   skip_cleanup: true
   provider: heroku
+  app: mansalu
   api_key:
     secure: "621e679a-3abb-4dcc-8b68-7f6640cd9e60"
